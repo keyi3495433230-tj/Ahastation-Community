@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWinUI>true</UseWinUI>
+    <ImportFrameworkWinFXTargets>true</ImportFrameworkWinFXTargets>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Ahastation.Community</AssemblyName>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <PathMap>$(MSBuildProjectDirectory)=/src</PathMap>
+    <Product>Ahastation</Product>
+    <Version>1.2.0</Version>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <ApplicationIcon>啊哈单词.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
+    <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="1.8.260803003" />
+    <PackageReference Include="Microsoft.WindowsAppSDK.DWrite" Version="1.8.25122902" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX" Version="1.7.20250829.1" />
+    <EmbeddedResource Include="啊哈单词.ico" />
+    <EmbeddedResource Include="啊哈单词-splash-mark.png" />
+    <EmbeddedResource Include="表格词库引导.png" />
+    <Content Include="Assets\Gaze\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="BuildNativeIslandResources" AfterTargets="Build" Condition="Exists('$(IntermediateOutputPath)priconfig.xml')">
+    <Exec Command="&quot;$(MakePriExeFullPath)&quot; new /pr &quot;$(MSBuildProjectDirectory)&quot; /cf &quot;$(IntermediateOutputPath)priconfig.xml&quot; /of &quot;$(TargetDir)resources.pri&quot; /in Ahastation.Community /o" StandardOutputImportance="Low" />
+  </Target>
+  <Target Name="PublishNativeIslandResources" AfterTargets="Publish">
+    <Copy SourceFiles="$(TargetDir)resources.pri" DestinationFolder="$(PublishDir)" />
+  </Target>
+</Project>

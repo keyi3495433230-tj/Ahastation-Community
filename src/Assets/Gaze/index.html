@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'; media-src 'self' blob:; img-src 'self' data: blob:; worker-src 'self' blob:">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="gaze.css"></head>
+<body><main id="preview"><div id="camera"><video id="video" autoplay muted playsinline></video><canvas id="overlay" aria-label="头部放大预览"></canvas><span class="preview-label">头部</span></div><div id="eyes"><canvas id="eyePreview" aria-label="双眼放大预览"></canvas><span class="preview-label">双眼</span></div><p id="status" role="status">开启摄像头后显示双眼跟踪预览</p></main>
+<section id="calibration" hidden><header><h1>视线校准</h1><p>保持头部平稳，只用眼睛跟随圆点。每个圆点停留片刻。</p><p id="progress" role="status"></p><button id="cancel">取消校准 · Esc</button></header><div id="target" aria-label="请注视此圆点"></div><p id="calibrationHint"></p></section>
+<script type="module" src="gaze.mjs"></script></body></html>

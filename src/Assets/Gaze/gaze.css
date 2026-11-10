@@ -1,0 +1,28 @@
+:root{color-scheme:light;--bg:#fbfbfb;--fg:#202020;--accent:#0078d4}
+*{box-sizing:border-box}
+body{margin:0;font:14px "Segoe UI","Microsoft YaHei UI",sans-serif;background:var(--bg);color:var(--fg);overflow:hidden}
+#preview{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px}
+#camera,#eyes{position:relative;flex-shrink:0;width:min(100%,calc((100vh - 70px)*1));background:#202020;border-radius:8px;overflow:hidden}
+#camera{aspect-ratio:4/3}
+#eyes{aspect-ratio:4}
+#video{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+canvas{display:block;width:100%;height:100%;transform:scaleX(-1)}
+.preview-label{position:absolute;top:4px;left:5px;font-size:10px;color:white;background:#0009;border-radius:3px;padding:1px 4px;pointer-events:none}
+p{margin:0;line-height:1.5}
+#status{text-align:center;min-height:21px;font-size:12px}
+#calibration{position:fixed;inset:0;background:var(--bg);z-index:1}
+[hidden]{display:none!important}
+header{position:absolute;top:32%;left:20%;right:20%;text-align:center;pointer-events:none}
+h1{font-size:23px;margin:0 0 12px}
+#progress{margin-top:10px;font-weight:600}
+button{pointer-events:auto;color:var(--fg);background:var(--bg);border:1px solid #8886;border-radius:4px;padding:7px 15px;margin-top:16px;cursor:pointer}
+button:hover{filter:brightness(.93)}
+#target{position:absolute;z-index:3;width:26px;height:26px;transform:translate(-50%,-50%);border-radius:50%;background:var(--accent);box-shadow:0 0 0 8px #0078d424;pointer-events:none}
+#target:after{content:"";display:block;width:5px;height:5px;background:white;border-radius:50%;margin:10px}
+#calibrationHint{position:absolute;bottom:18%;left:20%;right:20%;text-align:center}
+body.calibrating #preview{position:fixed;left:12px;top:12px;width:180px;height:230px;z-index:2;padding:6px;gap:5px;background:var(--bg);border:1px solid #8886;border-radius:8px;pointer-events:none}
+body.calibrating #camera,body.calibrating #eyes{width:100%}
+body.calibrating #status{font-size:11px;line-height:16px;max-height:48px;overflow:hidden}
+body.looking-at-screen{background:#c42b1c;color:#fff}
+body.looking-at-screen #preview,body.looking-at-screen #status{color:#fff}
+@media(max-height:420px){body.calibrating #preview{width:128px;height:174px}body.calibrating header{font-size:11px}body.calibrating h1{font-size:16px;margin-bottom:4px}body.calibrating button{margin-top:6px;padding:4px 8px}body.calibrating #progress{margin-top:4px}}
